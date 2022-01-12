@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <string.h>
+
+struct student
+{
+    char Name[40], RegNo[15], Course[150];
+    int Level1, Level2, Level3;
+};
+
+void MarkDeterminationCriteria(int index, struct student Student[4], float *marks)
+{
+    int TotalPrograms = Student[index].Level1 + Student[index].Level2 + Student[index].Level3;
+    
+    printf("Entering marks of %s\n", Student[index].Name);
+    printf("Theory marks obtained (Eg. 40.00/50.00): ");
+    scanf("%f/%f", marks, marks+2);
+    
+    *(marks+3) = 5.00;
+    if (TotalPrograms >= 80){*(marks+1) = 5.00;}
+    else if (TotalPrograms >= 75){*(marks+1) = 4.50;}
+    else if (TotalPrograms >= 70){*(marks+1) = 4.00;}
+    else if (TotalPrograms >= 65){*(marks+1) = 3.00;}
+    else if (TotalPrograms >= 60){*(marks+1) = 2.00;}
+    else if (TotalPrograms >= 50){*(marks+1) = 1.00;}
+    else{*(marks+1) = 0.00;}
+    
+}
+
+void main()
+{
+    int i = 0, j = 0;
+    float *marks_pointer, marks[4], class_marks[4*4]; 
+    
+    struct student Student[4];
+    
+    marks_pointer = &marks[0];
+    
+
+    strcpy(Student[i].Name, "Mohnish Ramachandran");
+    strcpy(Student[i+1].Name, "ABC DEF");
+    strcpy(Student[i+2].Name, "XYZ AAA");
+    strcpy(Student[i+3].Name, "YTD KHG");
+    
+    strcpy(Student[i].RegNo, "RA2111047010121");
+    strcpy(Student[i+1].RegNo, "RA2111047010023");
+    strcpy(Student[i+2].RegNo, "RA2111047010100");
+    strcpy(Student[i+3].RegNo, "RA2111047010001");
+    
+    strcpy(Student[i].Course, "B.Tech AI");
+    strcpy(Student[i+1].Course, "B.Tech AI");
+    strcpy(Student[i+2].Course, "B.Tech AI");
+    strcpy(Student[i+3].Course, "B.Tech AI");
+    
+    Student[i].Level1 = 80;
+    Student[i+1].Level1 = 20;
+    Student[i+2].Level1 = 60;
+    Student[i+3].Level1 = 100;
+    
+    Student[i].Level2 = 12;
+    Student[i+1].Level2 = 20;
+    Student[i+2].Level2 = 10;
+    Student[i+3].Level2 = 0;
+    
+    Student[i].Level3 = 10;
+    Student[i+1].Level3 = 10;
+    Student[i+2].Level3 = 10;
+    Student[i+3].Level3 = 0;
+    
+    for (i = 0; i < 4; i++){
+        marks_pointer = &marks[0];
+        
+        MarkDeterminationCriteria(i, Student, marks_pointer);
+        
+        do{
+            class_marks[j] = marks[j%4];
+            j++;
+        }while(j%4 != 0);
+    }
+    j = 0;
+    for (i = 0; i < 4; i++){
+        printf("\n------------------------------------------------------------------\n");
+        printf("%s\n%s\n%s\n\nTheory: %.2f/%.2f\nPracticals: %.2f/%.2f", Student[i].Course, Student[i].Name, Student[i].RegNo, class_marks[j], class_marks[j+2], class_marks[j+1], class_marks[j+3]);
+        printf("\nTotal Marks: %.2f/%.2f\n\n", ( (class_marks[j]+class_marks[j+1]) / (class_marks[j+2]+class_marks[j+3]) )*10.00, 10.00);
+        printf("\n------------------------------------------------------------------\n");
+        j += 4;
+    }
+    
+}
