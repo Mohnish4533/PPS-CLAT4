@@ -1,20 +1,54 @@
+/* 
+This is a program to help improve evaluating ELab progress and marks calculation
+Will help teachers evaluate quicker and easily
+
+Limitations as of now:
+1. Data is not directly taken from the ELab platform
+2. To simplify the test program only considering 4 students
+3. Data for Name[40], RegNo[15], Course[150], Level1, Level2, Level3 are static.(They are supposed to be directly taken from the ELab platform)
+   Static helps decrease execution time when you are checking the functioning of the program
+   
+Concepts used:
+1. Input and Output
+2. Flow Control and Operations
+3. Arrays and loops
+4. Strings
+5. Functions
+6. Structures
+7. Array Pointers
+
+What can be added:
+1. More options for criteria:
+2. Checking each question:
+    - getting details of each question
+    - and then comparing with other students and identifying who did it with the least cyclomatic complexity and least tokens etc...
+*/
+
+
+//header files
 #include <stdio.h>
 #include <string.h>
 
+// structure for - storing each students data and their ELab progress
 struct student
 {
     char Name[40], RegNo[15], Course[150];
     int Level1, Level2, Level3;
 };
 
+
+// Function for - criteria that the teacher can set to determine each student's marks.
 void MarkDeterminationCriteria(int index, struct student Student[4], float *marks)
 {
     int TotalPrograms = Student[index].Level1 + Student[index].Level2 + Student[index].Level3;
     
     printf("Entering marks of %s\n", Student[index].Name);
+    
+    // theory marks entered by teacher
     printf("Theory marks obtained (Eg. 40.00/50.00): ");
     scanf("%f/%f", marks, marks+2);
     
+    // practical marks calculation
     *(marks+3) = 5.00;
     if (TotalPrograms >= 80){*(marks+1) = 5.00;}
     else if (TotalPrograms >= 75){*(marks+1) = 4.50;}
@@ -26,46 +60,61 @@ void MarkDeterminationCriteria(int index, struct student Student[4], float *mark
     
 }
 
+
+// Main Program
 void main()
 {
+// variables in program
     int i = 0, j = 0;
     float *marks_pointer, marks[4], class_marks[4*4]; 
     
+// creating the stucture for the 4 students being considered in this test program
     struct student Student[4];
     
     marks_pointer = &marks[0];
-    
 
+    
+/* static data that can be changed when scaling up the program. 
+While increasing size, other fctors like size of other arrays in program need to be considered. (Eg. marks[4] or class_marks[4*4]) */
+
+// name of each of the students
     strcpy(Student[i].Name, "Mohnish Ramachandran");
     strcpy(Student[i+1].Name, "ABC DEF");
     strcpy(Student[i+2].Name, "XYZ AAA");
     strcpy(Student[i+3].Name, "YTD KHG");
-    
+
+// Registration number of each of the students    
     strcpy(Student[i].RegNo, "RA2111047010121");
     strcpy(Student[i+1].RegNo, "RA2111047010023");
     strcpy(Student[i+2].RegNo, "RA2111047010100");
     strcpy(Student[i+3].RegNo, "RA2111047010001");
-    
+
+// Course that each student is taking  
     strcpy(Student[i].Course, "B.Tech AI");
     strcpy(Student[i+1].Course, "B.Tech AI");
     strcpy(Student[i+2].Course, "B.Tech AI");
     strcpy(Student[i+3].Course, "B.Tech AI");
-    
+
+//Number of programs completed in Level 1    
     Student[i].Level1 = 80;
     Student[i+1].Level1 = 20;
     Student[i+2].Level1 = 60;
     Student[i+3].Level1 = 100;
-    
+
+// Number of programs completed in Level 2    
     Student[i].Level2 = 12;
     Student[i+1].Level2 = 20;
     Student[i+2].Level2 = 10;
     Student[i+3].Level2 = 0;
-    
+
+// Number of programs cmpleted in Level 3    
     Student[i].Level3 = 10;
     Student[i+1].Level3 = 10;
     Student[i+2].Level3 = 10;
     Student[i+3].Level3 = 0;
-    
+
+
+// looping to each student and calculating their theory and practical marks in the function- MarkDeterminationCriteria  
     for (i = 0; i < 4; i++){
         marks_pointer = &marks[0];
         
@@ -77,6 +126,9 @@ void main()
         }while(j%4 != 0);
     }
     j = 0;
+
+
+// looping to each student and printing their details and marks.
     for (i = 0; i < 4; i++){
         printf("\n------------------------------------------------------------------\n");
         printf("%s\n%s\n%s\n\nTheory: %.2f/%.2f\nPracticals: %.2f/%.2f", Student[i].Course, Student[i].Name, Student[i].RegNo, class_marks[j], class_marks[j+2], class_marks[j+1], class_marks[j+3]);
