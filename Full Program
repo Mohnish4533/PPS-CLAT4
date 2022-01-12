@@ -22,6 +22,7 @@ What can be added:
 2. Checking each question:
     - getting details of each question
     - and then comparing with other students and identifying who did it with the least cyclomatic complexity and least tokens etc...
+3. Leaderboards for various categories (top in class, top for the week)
 */
 
 
