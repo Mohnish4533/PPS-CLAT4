@@ -44,11 +44,11 @@ void MarkDeterminationCriteria(int index, struct student Student[4], float *mark
     
     printf("Entering marks of %s\n", Student[index].Name);
     
-    // theory marks entered by teacher
+// theory marks entered by teacher
     printf("Theory marks obtained (Eg. 40.00/50.00): ");
     scanf("%f/%f", marks, marks+2);
     
-    // practical marks calculation
+// practical marks calculation
     *(marks+3) = 5.00;
     if (TotalPrograms >= 80){*(marks+1) = 5.00;}
     else if (TotalPrograms >= 75){*(marks+1) = 4.50;}
