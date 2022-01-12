@@ -11,3 +11,15 @@ This makes the whole process easier and less time consuming for the teachers.
 
 Current limitations:
 1. Program does not take data directly from ELab. So manual test data needs to be provided
+
+
+Additions planned for the future:
+1. More options for criteria:
+2. Checking each question:
+    - getting details of each question
+    - and then comparing with other students and identifying who did it with the least cyclomatic complexity and least tokens etc...
+3. Leader in various categories like
+    - Overall Leaderboard
+    - weekly Leaderboard
+4. Search option to find progress of indivisual student
+5. Filter option to find people who have not completed the required number of programs
