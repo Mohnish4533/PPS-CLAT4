@@ -52,7 +52,6 @@ void MarkDeterminationCriteria(int index, struct student Student[4], float *mark
             *marks = (5.00-(0.50*i));
             break;
         }
-        printf("%d\n", i);
     }
 }
 
@@ -118,9 +117,8 @@ void main()
     // looping to each student and calculating their theory and practical marks in the function- MarkDeterminationCriteria  
     for (i = 0; i < 4; i++){
         marks_pointer = &marks[0];
-        printf("IN FUNCTION\n");
+        
         MarkDeterminationCriteria(i, Student, marks_pointer, Minimum_Programs, DiffPerHalfMark);
-        printf("OUT OF FUNCTION\n");
         
         class_marks[i][0] = *marks;
         class_marks[i][1] = *(marks+1);
