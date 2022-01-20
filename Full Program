@@ -39,88 +39,95 @@ struct student
 
 
 // Function for - criteria that the teacher can set to determine each student's marks.
-void MarkDeterminationCriteria(int index, struct student Student[4], float *marks)
+void MarkDeterminationCriteria(int index, struct student Student[4], float *marks, int Minimum_Programs, int DiffPerHalfMark)
 {
     int TotalPrograms = Student[index].Level1 + Student[index].Level2 + Student[index].Level3;
+    int i;
     
-// practical marks calculation
+    // practical marks calculation
     *(marks+1) = 5.00;
-    if (TotalPrograms >= 80){*marks = 5.00;}
-    else if (TotalPrograms >= 75){*marks = 4.50;}
-    else if (TotalPrograms >= 70){*marks = 4.00;}
-    else if (TotalPrograms >= 65){*marks = 3.00;}
-    else if (TotalPrograms >= 60){*marks = 2.00;}
-    else if (TotalPrograms >= 50){*marks = 1.00;}
-    else{*marks = 0.00;}
     
+    for (i = 0; i <= 10; i++){
+        if ( TotalPrograms >= (Minimum_Programs-(DiffPerHalfMark*i)) ){
+            *marks = (5.00-(0.50*i));
+            break;
+        }
+        printf("%d\n", i);
+    }
 }
 
 
 // Main Program
 void main()
 {
-// variables in program
-    int i = 0, j = 0;
+    // variables in program
+    int i = 0, j = 0, Minimum_Programs, DiffPerHalfMark;
     float *marks_pointer, marks[2], class_marks[4][2]; 
     
-// creating the stucture for the 4 students being considered in this test program
+    // creating the stucture for the 4 students being considered in this test program
     struct student Student[4];
     
     marks_pointer = &marks[0];
 
     
-/* static data that can be changed when scaling up the program. 
-While increasing size, other fctors like size of other arrays in program need to be considered. (Eg. marks[4] or class_marks[4*4]) */
+    /* static data that can be changed when scaling up the program. 
+    While increasing size, other fctors like size of other arrays in program need to be considered. (Eg. marks[4] or class_marks[4*4]) */
 
-// name of each of the students
+    // name of each of the students
     strcpy(Student[i].Name, "Mohnish Ramachandran");
     strcpy(Student[i+1].Name, "ABC DEF");
     strcpy(Student[i+2].Name, "XYZ AAA");
     strcpy(Student[i+3].Name, "YTD KHG");
 
-// Registration number of each of the students    
+    // Registration number of each of the students    
     strcpy(Student[i].RegNo, "RA2111047010121");
     strcpy(Student[i+1].RegNo, "RA2111047010023");
     strcpy(Student[i+2].RegNo, "RA2111047010100");
     strcpy(Student[i+3].RegNo, "RA2111047010001");
 
-// Course that each student is taking  
+    // Course that each student is taking  
     strcpy(Student[i].Course, "B.Tech AI");
     strcpy(Student[i+1].Course, "B.Tech AI");
     strcpy(Student[i+2].Course, "B.Tech AI");
     strcpy(Student[i+3].Course, "B.Tech AI");
 
-//Number of programs completed in Level 1    
+    //Number of programs completed in Level 1    
     Student[i].Level1 = 80;
     Student[i+1].Level1 = 20;
     Student[i+2].Level1 = 60;
     Student[i+3].Level1 = 100;
 
-// Number of programs completed in Level 2    
+    // Number of programs completed in Level 2    
     Student[i].Level2 = 12;
     Student[i+1].Level2 = 20;
     Student[i+2].Level2 = 10;
     Student[i+3].Level2 = 0;
 
-// Number of programs cmpleted in Level 3    
+    // Number of programs cmpleted in Level 3    
     Student[i].Level3 = 10;
     Student[i+1].Level3 = 10;
     Student[i+2].Level3 = 10;
     Student[i+3].Level3 = 0;
 
-
-// looping to each student and calculating their theory and practical marks in the function- MarkDeterminationCriteria  
+    //Marks Criteria input
+    printf("Minimum number of programs that need to be completed: ");
+    scanf("%d", &Minimum_Programs);
+    printf("Difference between every half mark \n(Eg. 80 programs for 5.00 and 75 programs for 4.50. Difference = 5 programs): ");
+    scanf("%d", &DiffPerHalfMark);
+    
+    // looping to each student and calculating their theory and practical marks in the function- MarkDeterminationCriteria  
     for (i = 0; i < 4; i++){
         marks_pointer = &marks[0];
-        
-        MarkDeterminationCriteria(i, Student, marks_pointer);
+        printf("IN FUNCTION\n");
+        MarkDeterminationCriteria(i, Student, marks_pointer, Minimum_Programs, DiffPerHalfMark);
+        printf("OUT OF FUNCTION\n");
         
         class_marks[i][0] = *marks;
         class_marks[i][1] = *(marks+1);
     }
 
 
-// looping to each student and printing their details and marks.
+    // looping to each student and printing their details and marks.
     for (i = 0; i < 4; i++){
         j = 0;
         printf("\n------------------------------------------------------------------\n");
