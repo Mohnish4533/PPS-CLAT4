@@ -23,6 +23,8 @@ What can be added:
     - getting details of each question
     - and then comparing with other students and identifying who did it with the least cyclomatic complexity and least tokens etc...
 3. Leaderboards for various categories (top in class, top for the week)
+4. Search option to find progress of indivisual student
+5. Filter option to find people who have not completed the required number of programs
 */
 
 
