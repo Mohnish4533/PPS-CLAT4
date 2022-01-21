@@ -13,7 +13,7 @@ Current limitations:
 1. Program does not take data directly from ELab. So manual test data needs to be provided
 
 
-Additions planned for the future:
+Additions that can be made:
 1. More options for criteria:
 2. Checking each question:
     - getting details of each question
